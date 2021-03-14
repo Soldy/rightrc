@@ -58,7 +58,9 @@ const rightBase = function(){
     const _add = function(id){
         if( _can.indexOf(id) > -1)
             return false;
-        _can.push(id);
+        _can.push(
+            id.toString()
+        );
         return true;
     };
     const _check = function(id){
