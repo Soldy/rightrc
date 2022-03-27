@@ -1,5 +1,15 @@
+/*
+ *  @Soldy\nanoTest\2021.02.04\GPL3
+ */
+'use strict';
+const $setuprc = (require('setuprc')).base;
+const $poolrc = new (require('poolrc')).base;
 
-const rightBase = function(){
+/*
+ * @param {setuprc} settings 
+ * @prototype
+ */
+const rightBase = function(settings){
     this.getPower = function(){
         return _getPower();
     };
@@ -35,23 +45,35 @@ const rightBase = function(){
     this.list = function(){
         return _list();
     };
-    let _power  = 100;
+    /*
+     * setup  helper
+     * @private
+     */
+    const _setup = new $setuprc({
+        'power' : {
+            'type'    : 'integer',
+            'default' : 100
+        },
+        'file' : {
+            'type'    : 'string',
+            'default' : 'right.jsprc'
+        }
+    });
+    /*
+     * alloved ids
+     * @private
+     * @var {array}
+     *
+     */
     let _can    = [];
     const _setPower = function(power){
-        if(
-            (Number.isInteger(power)) ||
-             ( 1 > power ) ||
-             ( power > 1024 )
-        )
-            return false;
-        _power = parseInt(power);
-        return true;
+        return _setup.setup({'power': power});
     };
     const _getPower = function(){
-        return parseInt(_power);
+        return _setup.get('power');
     };
     const _checkPower = function(power){
-        if(_power > power)
+        if(_setup.get('power') > power)
             return true;
         return false;
     };
@@ -61,6 +83,7 @@ const rightBase = function(){
         _can.push(
             id.toString()
         );
+        _update();
         return true;
     };
     const _check = function(id){
@@ -74,6 +97,7 @@ const rightBase = function(){
             return false;
         delete _can[pos];
         _can.splice(pos, 1);
+        _update();
         return true;
     };
     const _list = function(){
@@ -97,7 +121,31 @@ const rightBase = function(){
             return _checkAnys(in_);
         return _checkAny(in_);
     };
+    const _update = async function(){
+        await _pool.set('can', _can);
+        await _pool.set('power', _setup.get('power'));
+        await _pool.save();
+    };
+    const _load = async function(){
+        await _pool.load();
+        _can = _pool.get('can');
+        _setup.setup({
+            'power' : _pool.get('power')
+        });
+    };
+    /*
+     *
+     * setup init 
+     *
+     */
+    if(typeof settings === 'undefined')
+        throw Error('settings are missing');
+    _setup.setup(settings);
+    const _pool = new $poolrc ({
+        'limit' : 4,
+        'file'  : _setup.get('file')
+    });
+    _load();
 };
-
 
 exports.base = rightBase;
