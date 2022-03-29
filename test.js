@@ -12,7 +12,7 @@ const _options = {
         'right.jsprc'
     ),
     'power' : 50
-}
+};
 const $rightrc = new (require('./index.js')).base(_options);
 nanoTest.add(
     'getPower',
@@ -31,7 +31,7 @@ nanoTest.add(
         'options':[60]
     },
     '===',
-   false 
+    false 
 );
 
 nanoTest.add(
