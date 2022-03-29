@@ -3,7 +3,7 @@
  */
 'use strict';
 const $setuprc = (require('setuprc')).base;
-const $poolrc = new (require('poolrc')).base;
+const $poolrc = (require('poolrc')).base;
 
 /*
  * @param {setuprc} settings 
@@ -22,6 +22,9 @@ const rightBase = function(settings){
     this.check = function(in_){
         return  _checkCan(in_);
     };
+    this.checkPower = function(in_){
+        return _checkPower(in_);
+    }
     this.add = function(in_){
         if(
             (typeof in_ !== 'string')
@@ -65,7 +68,7 @@ const rightBase = function(settings){
      * @var {array}
      *
      */
-    let _can    = [];
+    let _can = [];
     const _setPower = function(power){
         return _setup.setup({'power': power});
     };
@@ -87,6 +90,7 @@ const rightBase = function(settings){
         return true;
     };
     const _check = function(id){
+        console.log(_can);
         if( _can.indexOf(id) > -1)
             return true;
         return false;
@@ -105,7 +109,7 @@ const rightBase = function(settings){
     };
     const _checkAny = function(in_){
         if(typeof in_ === 'string')
-            return _check();
+            return _check(in_);
         if(Number.isInteger(in_))
             return _checkPower(in_);
         return false;
@@ -128,7 +132,10 @@ const rightBase = function(settings){
     };
     const _load = async function(){
         await _pool.load();
-        _can = _pool.get('can');
+        if (typeof  _pool.get('can') !== 'undefined')
+            _can = _pool.get('can');
+        if (typeof  _pool.get('power') === 'undefined')
+            _pool.set('power', 50);
         _setup.setup({
             'power' : _pool.get('power')
         });
