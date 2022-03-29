@@ -190,6 +190,42 @@ nanoTest.add(
     true
 );
 nanoTest.add(
+    'check array id not exist',
+    {
+        'function':$rightrc.check,
+        'options':[['fgfgh','dsghdh']]
+    },
+    '===',
+    false
+);
+nanoTest.add(
+    'check array id exist',
+    {
+        'function':$rightrc.check,
+        'options':[['fgfgh','ghfdhgh','dsghdh']]
+    },
+    '===',
+    true
+);
+nanoTest.add(
+    'check array id not exist more power',
+    {
+        'function':$rightrc.check,
+        'options':[['fgfgh', 100, 'dsghdh']]
+    },
+    '===',
+    false
+);
+nanoTest.add(
+    'check array id not exist les power',
+    {
+        'function':$rightrc.check,
+        'options':[['fgfgh', 10, 'dsghdh']]
+    },
+    '===',
+    true
+);
+nanoTest.add(
     'del id exist',
     {
         'function':$rightrc.list,
