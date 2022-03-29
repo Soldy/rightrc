@@ -1,4 +1,4 @@
-#Rightrc
+# Rightrc
 
 Identity right holder and saver for hobby AI projects.
 
