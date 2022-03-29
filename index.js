@@ -24,7 +24,10 @@ const rightBase = function(settings){
     };
     this.checkPower = function(in_){
         return _checkPower(in_);
-    }
+    };
+    this.checkId = function(in_){
+        return _check(in_);
+    };
     this.add = function(in_){
         if(
             (typeof in_ !== 'string')
