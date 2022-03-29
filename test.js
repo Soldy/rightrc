@@ -124,15 +124,6 @@ nanoTest.add(
     true
 );
 
-nanoTest.add(
-    'checkId id not exist',
-    {
-        'function':$rightrc.checkId,
-        'options':['ghfdhgh']
-    },
-    '===',
-    true
-);
 
 nanoTest.add(
     'checkId id not exist',
