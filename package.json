@@ -21,6 +21,6 @@
     "nanoTest": "0.9.9-beta28"
   },
   "dependencies": {
-    "poolrc": "1.0.0-rc6"
+    "poolrc": "1.0.0-rc7"
   }
 }
