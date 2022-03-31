@@ -1,6 +1,6 @@
 {
   "name": "rightrc",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "right helper",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Soldy/rigthtrc.git"
+    "url": "https://github.com/Soldy/rightrc.git"
   },
   "keywords": [],
   "author": "Soldy <npmjs@gidigi.com> (http://gidigi.com)",
