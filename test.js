@@ -1,4 +1,5 @@
 'use strict';
+const fs = require('fs');
 const path = require('path');
 const nanoTest  = new (require('nanoTest')).test({
     'progress_bar' : false,
@@ -279,5 +280,18 @@ nanoTest.add(
     'j==',
     []
 );
+nanoTest.add(
+    'delete store file',
+    {
+        'function':async function(){
+           await fs.unlinkSync('test/right.jsprc');
+           return true;
+        },
+        'options':[]
+    },
+    '!==',
+    false
+);
+
 
 nanoTest.run();
