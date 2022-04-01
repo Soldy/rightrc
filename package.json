@@ -1,6 +1,6 @@
 {
   "name": "rightrc",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "right helper",
   "main": "index.js",
   "scripts": {
@@ -21,6 +21,7 @@
     "nanoTest": "0.9.9-beta28"
   },
   "dependencies": {
-    "poolrc": "1.0.0-rc7"
+    "poolrc": "1.0.0-rc7",
+    "setuprc": "^0.9.9-beta20"
   }
 }
