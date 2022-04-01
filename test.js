@@ -14,7 +14,23 @@ const _options = {
     ),
     'power' : 50
 };
+const _options_second = {
+    'file' : path.join(
+        process.cwd(),
+        'test',
+        'right.second.jsprc'
+    ),
+    'power' : 50
+};
+
 const $rightrc = new (require('./index.js')).base(_options);
+const $rightrcSecond = new (require('./index.js')).base(_options_second);
+
+const _all_result = {
+    power:75,
+    can:['ghfdhgh']
+};
+
 nanoTest.add(
     'getPower',
     {
@@ -236,6 +252,15 @@ nanoTest.add(
     ['ghfdhgh']
 );
 nanoTest.add(
+    'all',
+    {
+        'function':$rightrc.all,
+        'options':[]
+    },
+    'j==',
+    _all_result
+);
+nanoTest.add(
     'del id exist',
     {
         'function':$rightrc.del,
@@ -280,11 +305,46 @@ nanoTest.add(
     'j==',
     []
 );
+
+nanoTest.add(
+    'import test',
+    {
+        'function':$rightrcSecond.import,
+        'options':[_all_result.power, _all_result.can]
+    },
+    '!==',
+    false
+);
+nanoTest.add(
+    'import result check ',
+    {
+        'function':$rightrcSecond.all,
+        'options':[]
+    },
+    'j==',
+    _all_result
+);
+
+
 nanoTest.add(
     'delete store file',
     {
         'function':async function(){
            await fs.unlinkSync('test/right.jsprc');
+           return true;
+        },
+        'options':[]
+    },
+    '!==',
+    false
+);
+
+
+nanoTest.add(
+    'delete second store file',
+    {
+        'function':async function(){
+           await fs.unlinkSync('test/right.second.jsprc');
            return true;
         },
         'options':[]
