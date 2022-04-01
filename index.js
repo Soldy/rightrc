@@ -67,8 +67,8 @@ const rightBase = function(settings){
      */
     this.all = function(){
         return {
-            power : _getPower(),
-            can   : _list()
+            'power' : _getPower(),
+            'can'   : _list()
         };
     };
     /*
@@ -84,11 +84,29 @@ const rightBase = function(settings){
         return _del(in_);
     };
     /*
+     * @param {integer}
+     * @param {array}
+     * @public
+     * @return {boolean}
+     */
+    this.import = function(power, ids){
+        return _import(power, ids);
+    };
+    /*
      * @public
      * @return {array}
      */
     this.list = function(){
         return _list();
+    };
+    /*
+     * @public
+     * @return {boolean}
+     */
+    this.defaultPosition = function(){
+        if(_default_position)
+            return true;
+        return false;
     };
     /*
      * setup  helper
@@ -111,6 +129,11 @@ const rightBase = function(settings){
      *
      */
     let _can = [];
+    /*
+     * @private
+     * @var {boolean}
+     */
+    let _default_position = true;
     /*
      * @param {integer}
      * @private
@@ -141,14 +164,39 @@ const rightBase = function(settings){
      * @private
      * @return {boolean}
      */
-    const _add = function(id){
+    const _add = function(id, lazy){
         if( _can.indexOf(id) > -1)
             return false;
         _can.push(
             id.toString()
         );
+        if(typeof lazy === 'undefined')
+            _update();
+        return true;
+    };
+    /*
+     * @param {array}
+     * @private
+     * @return {boolean}
+     */
+    const _adds = function(ids){
+        if(!Array.isArray(ids))
+            return false;
+        for (let id in ids)
+            if(typeof id === 'string')
+                add(id, true);
         _update();
         return true;
+    };
+    /*
+     * @param {integer}
+     * @param {array}
+     * @private
+     * @return {boolean}
+     */
+    const _import = function(power, ids){
+        _setPower(power);
+        _adds(ids);
     };
     /*
      * @param {string}
@@ -229,8 +277,10 @@ const rightBase = function(settings){
         await _pool.load();
         if (typeof  _pool.get('can') !== 'undefined')
             _can = _pool.get('can');
-        if (typeof  _pool.get('power') === 'undefined')
+        if (typeof  _pool.get('power') === 'undefined'){
             _pool.set('power', 50);
+            _default_position = false;
+        }
         _setup.setup({
             'power' : _pool.get('power')
         });
