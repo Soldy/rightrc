@@ -182,9 +182,9 @@ const rightBase = function(settings){
     const _adds = function(ids){
         if(!Array.isArray(ids))
             return false;
-        for (let id in ids)
+        for (let id of ids)
             if(typeof id === 'string')
-                add(id, true);
+                _add(id, true);
         _update();
         return true;
     };
@@ -196,7 +196,7 @@ const rightBase = function(settings){
      */
     const _import = function(power, ids){
         _setPower(power);
-        _adds(ids);
+        return _adds(ids);
     };
     /*
      * @param {string}
