@@ -120,6 +120,14 @@ const rightBase = function(settings){
         'file' : {
             'type'    : 'string',
             'default' : 'right.jsprc'
+        },
+        'write' : {
+            'type'    : 'boolean',
+            'default' : true
+        },
+        'read' : {
+            'type'    : 'boolean',
+            'default' : true
         }
     });
     /*
@@ -268,7 +276,8 @@ const rightBase = function(settings){
     const _update = async function(){
         await _pool.set('can', _can);
         await _pool.set('power', _setup.get('power'));
-        await _pool.save();
+        if( _setup.get('write') )
+            await _pool.save();
     };
     /*
      * @private
@@ -297,7 +306,8 @@ const rightBase = function(settings){
         'limit' : 4,
         'file'  : _setup.get('file')
     });
-    _load();
+    if( _setup.get('read') )
+        _load();
 };
 
 exports.base = rightBase;
