@@ -330,8 +330,8 @@ nanoTest.add(
     'delete store file',
     {
         'function':async function(){
-           await fs.unlinkSync('test/right.jsprc');
-           return true;
+            await fs.unlinkSync('test/right.jsprc');
+            return true;
         },
         'options':[]
     },
@@ -344,8 +344,8 @@ nanoTest.add(
     'delete second store file',
     {
         'function':async function(){
-           await fs.unlinkSync('test/right.second.jsprc');
-           return true;
+            await fs.unlinkSync('test/right.second.jsprc');
+            return true;
         },
         'options':[]
     },
