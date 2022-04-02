@@ -148,7 +148,9 @@ const rightBase = function(settings){
      * @return {boolean}
      */
     const _setPower = function(power){
-        return _setup.setup({'power': power});
+        let out = _setup.setup({'power': power});
+        _update();
+        return out;
     };
     /*
      * @private
