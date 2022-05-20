@@ -1,6 +1,6 @@
 {
   "name": "rightrc",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "right helper",
   "main": "index.js",
   "scripts": {
