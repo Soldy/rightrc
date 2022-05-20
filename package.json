@@ -18,10 +18,10 @@
   },
   "homepage": "https://github.com/Soldy/rightrc#readme",
   "devDependencies": {
-    "nanoTest": "0.9.9-beta28"
+    "nanoTest": "0.9.9-beta31"
   },
   "dependencies": {
     "poolrc": "1.0.0-rc7",
-    "setuprc": "^0.9.9-beta20"
+    "setuprc": "^0.9.9-beta21"
   }
 }
