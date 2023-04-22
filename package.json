@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/Soldy/rightrc#readme",
   "devDependencies": {
-    "nanoTest": "0.9.9-beta31"
+    "nanoTest": "0.9.9-beta32"
   },
   "dependencies": {
     "poolrc": "1.0.0-rc7",
